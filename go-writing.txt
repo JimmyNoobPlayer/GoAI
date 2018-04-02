@@ -1,0 +1,45 @@
+Feb 2018 Introduction and First Steps.
+
+In March of 2017, almost a year ago, an artificial intelligence program called AlphaGo played a highly publicized series of games with the high-level Go professional Lee Sedol. The AI won 4 of 5 games, which shocked many experts in both artificial intelligence and Go. The program has since improved even further, defeating Ke Jie, widely considered the best human player in the world. He said the gap between AlphaGo and humans is now so great that the program is a teacher, not a rival.
+
+I listened to podcasts talking about the games and watched a large portion of Lee Sedol's matches on YouTube. The emotions of the matches played and the implications for the future of AI and games in general were fascinating and inspirational. I read about the techniques for making neural networks and the methods used in making AlphaGo, and I wanted to create my own artificial intelligence as well as learn to play the game myself. I'm documenting here my process of creating an artificial intelligence.
+
+First off I will need to create a program that simply records and enforces the play of the game. I'll be making classes in C#. I shouldn't underestimate the size of this task I've undertaken: this first step is still a sizeable amount of work, and it is trivial compared to the difficulties ahead.
+
+
+next writing task: explain basic rules and Ko.
+Interesting choice points: Explain Ko and the need for board history. Give example for Ko and basic explanation. Possible shortcut, but consider a two-part Ko loop, give example.
+
+ BW
+BW W
+ BW
+
+next after that:
+My classes and warning that I may be doing things awkwardly, try for reliability even when it could be wasting a huge amount of time.
+
+
+Rules of Go
+The rules of Go are so simple and the strategies of play are so deep and interesting, it's easy to believe the game was created by a god as some stories tell. The enormous wealth of strategic thought built by centuries of dedicated work is founded unambiguously on these rules:
+
+1. Two players, Black and White, alternate placing stones of their color at any empty point on the board of 19 x 19 intersections.
+
+2. Each point has four liberties that surround it, represented by lines drawn from each point. When two or more stones of the same color are directly connected on these lines, they form a single group or chain. When the liberties of every stone in a chain are covered by enemy stones (or the edge of the board), the chain is "captured" and removed from the board. 
+
+3. When White plays a stone, Black chains that are captured are removed from the board before checking to see if White chains are in danger. In the same way White chains are removed first after Black plays a stone. (It is possible to play a move that results in the loss of only stones of your color, some rules variations forbid this. Either way, it's never a strategically sound play.)
+
+4. Instead of playing a stone during any turn, a player may pass. When both players pass consecutively, the game is over. Stones on the board and any empty points that are surrounded by one color, minus any stones both players agree are dead, count toward that color's territory. After optionally adding a bonus to the player who played second, and sometimes counting the captured stones (depending on the rule variation being played), the color with the most territory is the winner.
+
+5. And finally, the Ko rule: no stone may be played that recreates a previous board state exactly. The Ko rule is the "Parallel Postulate" of Go in that a huge amount of interesting strategy can be made without it, and there are a few variations that seem equally viable.
+
+Restating the rules in a simple form my computer program will use (and heavily borrowing from the Rules_of_Go wikipedia page),
+
+1. There are two players, Black and White. Black plays first.
+2. The board includes 19 x 19 intersections, and is empty at the start unless both players agree to start with some handicap. 
+3. Concepts of "adjacent", "connected", and "liberty" can be unambiguously defined, which I won't write out here.
+4. A turn of play consists of:
+ 4a. Either pass or place a stone in any empty point that doesn't lead to a repeated board state (Ko rule)
+ 4b. Remove enemy stones with no liberties.
+ 4c. Remove friendly stones with no liberties.
+5. When both players pass, the game is over. Every stone on the board and every group of empty points that is connected to only stones of one color count as that color's area. (This is "area scoring", not "territory scoring".) White is given a komi (compensation for playing second) of 6.5. Or rather, six points while giving ties to White.
+
+As an example of the deep strategies that arise from these rules, I'll examine the proverb "Two eyes live". A solid group of connected stones can be killed if every space around them is covered by enemy stones (or the edge of the board), but if the group has internal empty spaces, those obviously count as liberties for the stones of the group and must be filled to capture the group. If a formation with a single internal empty point is covered on the outside then an enemy stone is placed in the empty point, the entire group will have no liberties so it will be captured, then the last placed stone will suddenly be free and alive even though it appeared to be suicidal. However if the solid group has two different internal empty points, two "eyes", then attacking the group by placing an opposing stone in one of the eyes will be truly suicidal. The attacking stone will capture nothing, then be captured itself, producing nothing except a wasted move. A group with two eyes can never be killed by the enemy.

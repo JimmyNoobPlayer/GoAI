@@ -1,0 +1,51 @@
+TODO: create classes to hold an entire game in memory, then create a way to display that game.
+Create an empty board, add stones.
+TODO: Finish UsableGoBoard class, which doesn't record chain information, just stones. Every turn it needs to find all chains and determine if they are alive.
+
+
+
+So a big question is, should the game continually record and update the chains of the board or just the stones and create the chains whenever a new stone is placed? updating the chains could be very tricky. I think a simpler way that will be easier to prove works reliably is to store only stone information and check for deaths every turn. That will be implemented in UsableGoBoard.
+
+Updating the stones is not so bad, only life and death need be calculated, not the liberties of every chain.
+
+A recursive function is the easiest way to do this. Only stones touching the newest placed stone can be killed (assuming the board was in a legal state to start with), so first check all four spaces touching the new stone. If they are enemy stones, then check if that stone is now alive. If it is touching an empty space it is alive, and if it is touching a friendly stone that is alive it is alive. if no enemy stones are killed, check the latest space itself to see if it is alive.
+
+A chain is dead only if every single liberty is smothered, if any liberty is open the whole chain is alive.
+
+
+
+
+TODO: Make a way to change a board into a set of chains. Each space can be described as empty, a part of a white chain or a part of a black chain. Each chain can have a number of liberties.
+
+Legal verification: check a move is legal through obvious problems (like trying to place a stone on an intersection that was already filled) through suicide prevention, and through KO checking.
+
+Process of playing a stone: the old correct board is saved as a previous game state. A new board is generated to hold and check the new move. When a move is given, first check it's empty. Then check for captured enemy pieces, and remove them if found. If no enemy pieces were taken, check for suicides. If a suicide exists, the move is illegal and rejected. After all that, every time check for Ko by looking at all the previous board states, if a match is found, the move is illegal and rejected. If the move was legal, the board state is saved as the current correct state.
+
+
+Previous board states will be saved with only the stone values (W,B,empty) for each space, while the current board will hold 
+
+
+Checking for captured stones is obviously a very important part of the legal state of the game. The current board state should contain sets of every chain and a listing of thier liberties. When a stone is added, checking the four locations that stone touched will be enough to find all chains that could be captured or suicided by the stone. This 
+
+
+
+TODO: have a way to store SETS of SPACES, which could be potential legal moves for each player, sets of stones in a chain, sets of territories owned by a player or neutral territories.
+
+
+RULES:
+board starts empty, black goes first.
+when a stone is placed, first remove enemy strings with no liberties, then friendlies. If there is a no-suicide rule, then any move that causes friendly death is illegal. If a move takes enemy stones, then necessarily that move won't cause suicide.
+Passing twice will end the game. For this version that could play with extremely stupid players, passing when there is still neutral territory is impossible.
+
+HOWEVER SEKI is a situation that could have strange strategic plays if passing is not always an option. It is possible that a SEKI, a situation with two intersections that are liberties to otherwise dead sections (or one mutual liberty for two chains with one eye each) will cause the first person to play to lose territory. There are other possible Seki situations. Even though the points will be defined as neutral, the optimal play will be for no one to play there. THe first person forced to play will be at a disadvantage. I don't think timing other moves to make the last possible move outside of a seki situation to force the opponent to break it is in the spirit of Go, this will create many strange strategies that would never exist between reasonable players.
+
+So the intelligences should be (possibly) incredibly stupid, but they should have the smarts necessary to detect seki situations and be able to pass if sekis exist.
+
+huh.
+
+
+
+endgame rule:
+territory only, or count empty spots in territory plus prisoners.
+
+optional no-suicide rule: a move that causes no enemy strings to lose all liberty (takes prisoners) but results in friendly strings losing all liberties, causes suicide so it will be an illegal move that ccan't be considered.
