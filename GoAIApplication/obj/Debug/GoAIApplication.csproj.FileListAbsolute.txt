@@ -1,0 +1,12 @@
+c:\users\james\documents\visual studio 2015\Projects\GoAIApplication\GoAIApplication\bin\Debug\GoAIApplication.exe.config
+C:\Users\james\Documents\Visual Studio 2015\Projects\GoAIApplication\GoAIApplication\obj\Debug\GoAIApplication.csprojResolveAssemblyReference.cache
+C:\Users\james\Documents\Visual Studio 2015\Projects\GoAIApplication\GoAIApplication\bin\Debug\GoAIApplication.exe
+C:\Users\james\Documents\Visual Studio 2015\Projects\GoAIApplication\GoAIApplication\bin\Debug\GoAIApplication.pdb
+C:\Users\james\Documents\Visual Studio 2015\Projects\GoAIApplication\GoAIApplication\obj\Debug\GoAIApplication.exe
+C:\Users\james\Documents\Visual Studio 2015\Projects\GoAIApplication\GoAIApplication\obj\Debug\GoAIApplication.pdb
+C:\Users\james\Desktop\Git\GoAIApplication\bin\Debug\GoAIApplication.exe.config
+C:\Users\james\Desktop\Git\GoAIApplication\obj\Debug\GoAIApplication.exe
+C:\Users\james\Desktop\Git\GoAIApplication\obj\Debug\GoAIApplication.pdb
+C:\Users\james\Desktop\Git\Go AI\GoAIApplication\bin\Debug\GoAIApplication.exe.config
+C:\Users\james\Desktop\Git\Go AI\GoAIApplication\obj\Debug\GoAIApplication.exe
+C:\Users\james\Desktop\Git\Go AI\GoAIApplication\obj\Debug\GoAIApplication.pdb

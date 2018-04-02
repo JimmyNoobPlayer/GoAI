@@ -1,0 +1,10 @@
+This is a pretty embarrassingly bad project. Please don't send me suggestions
+to improve it, I know it ain't good. I'm either slowly working to improve it
+myself or I've given up on it. It may be something in the future.
+
+Go artificial intelligence
+a program to record and display a game of Go
+usable by both human players and artificial intelligences
+implement AI using a neural net and search methods
+experiment with different neural net training methods
+try to create an AI that can train smaller AIs as quickly as possible, as a way to ultimately train humans.
